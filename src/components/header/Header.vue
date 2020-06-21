@@ -1,7 +1,18 @@
 <template>
-  <div class="header">
-    <img v-if="!isMobile" alt="Vue logo" src="../../assets/logo.png" />
-    <SearchBar />
+  <div class="header" :class="{ mobile: isMobile }">
+    <img
+      v-if="!isMobile"
+      class="logo"
+      alt="Youtube logo"
+      src="../../assets/logo.png"
+    />
+    <img
+      v-if="isMobile"
+      class="mobile-logo"
+      alt="Youtube logo"
+      src="../../assets/logo-mobile.png"
+    />
+    <SearchBar :isMobile="isMobile" />
   </div>
 </template>
 
@@ -10,22 +21,33 @@ import SearchBar from "../shared/search/search.component";
 export default {
   name: "Header",
   components: {
-    SearchBar
+    SearchBar,
   },
   props: {
-    isMobile: Boolean
-  }
+    isMobile: Boolean,
+  },
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .header {
   height: 56px;
   display: flex;
+  align-items: center;
   justify-content: space-between;
-}
-img {
-  width: 80px;
-  height: 24px;
+
+  &.mobile {
+    background-color: #d40f1c;
+    padding: 10px;
+    height: auto;
+  }
+  .logo {
+    width: 80px;
+    height: 24px;
+  }
+  .mobile-logo {
+    width: 35px;
+    height: 24px;
+  }
 }
 </style>
