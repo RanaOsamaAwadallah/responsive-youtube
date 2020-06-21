@@ -1,17 +1,19 @@
 <template>
   <div id="app">
-    <Header :isMobile="true" />
+    <Header :isMobile="isMobile()" />
   </div>
 </template>
 
 <script>
 import Header from "./components/header/Header.vue";
+import { mixinDetictingMobile } from "./helpers/mixins";
 
 export default {
   name: "App",
   components: {
     Header,
   },
+  mixins: [mixinDetictingMobile],
 };
 </script>
 

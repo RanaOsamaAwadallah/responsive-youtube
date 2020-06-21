@@ -7,8 +7,15 @@ import {
   FontAwesomeLayers,
   FontAwesomeLayersText,
 } from "@fortawesome/vue-fontawesome";
-import { mixinDetictingMobile } from "./helpers/mixins";
+import VueGoogleApi from "vue-google-api";
 
+const config = {
+  apiKey: "your_api_key",
+  clientId: "your_client_id.apps.googleusercontent.com",
+  scope: "space_separated_scopes",
+};
+
+Vue.use(VueGoogleApi, config);
 library.add(faSearch, faWindowClose);
 
 Vue.component("font-awesome-icon", FontAwesomeIcon);
@@ -19,5 +26,4 @@ Vue.config.productionTip = false;
 
 new Vue({
   render: (h) => h(App),
-  mixins: [mixinDetictingMobile],
 }).$mount("#app");

@@ -14,7 +14,10 @@
     >
       <font-awesome-icon icon="window-close" size="lg" />
     </button>
-    <button class="search-bar-button">
+    <button
+      class="search-bar-button"
+      @click="$emit('search-click', searchText)"
+    >
       <font-awesome-icon icon="search" size="lg" />
     </button>
   </div>
