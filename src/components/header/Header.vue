@@ -1,6 +1,6 @@
 <template>
   <div class="header">
-    <img alt="Vue logo" src="../../assets/logo.png" />
+    <img v-if="!isMobile" alt="Vue logo" src="../../assets/logo.png" />
     <SearchBar />
   </div>
 </template>
@@ -10,11 +10,11 @@ import SearchBar from "../shared/search/search.component";
 export default {
   name: "Header",
   components: {
-    SearchBar,
+    SearchBar
   },
   props: {
-    msg: String,
-  },
+    isMobile: Boolean
+  }
 };
 </script>
 

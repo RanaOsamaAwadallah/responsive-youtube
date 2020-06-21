@@ -11,6 +11,9 @@ import {
   FontAwesomeLayers,
   FontAwesomeLayersText,
 } from "@fortawesome/vue-fontawesome";
+import {
+  mixinDetictingMobile
+} from './helpers/mixins'
 
 library.add(faSearch);
 
@@ -22,4 +25,5 @@ Vue.config.productionTip = false;
 
 new Vue({
   render: h => h(App),
+  mixins: [mixinDetictingMobile]
 }).$mount('#app')

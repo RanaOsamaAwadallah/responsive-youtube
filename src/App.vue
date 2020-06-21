@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Header />
+    <Header :isMobile="isMobile()" />
   </div>
 </template>
 
@@ -10,8 +10,8 @@ import Header from "./components/header/Header.vue";
 export default {
   name: "App",
   components: {
-    Header,
-  },
+    Header
+  }
 };
 </script>
 
