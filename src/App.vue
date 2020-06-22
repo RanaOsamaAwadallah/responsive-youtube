@@ -1,7 +1,15 @@
 <template>
   <div id="app" :class="{mobile: isMobile()}">
-    <Header :isMobile="isMobile()" v-on:search-btn-click="getSearchedVideos($event)" />
-    <SearchResult :isMobile="isMobile()" :channels="channels" :videos="videos" class="body" />
+    <Header v-cloak :isMobile="isMobile()" v-on:search-btn-click="getSearchedVideos($event)" />
+    <div v-cloak v-if="errorMessage">{{this.errorMessage}}</div>
+    <SearchResult
+      v-cloak
+      v-else
+      :isMobile="isMobile()"
+      :channels="channels"
+      :videos="videos"
+      class="body"
+    />
   </div>
 </template>
 
@@ -22,8 +30,17 @@ export default {
     return {
       videos: Array,
       channels: Array,
-      isLoading: Boolean
+      isLoading: Boolean,
+      searchValue: String,
+      nextPageToken: String,
+      errorMessage: String
     };
+  },
+  created() {
+    window.addEventListener("scroll", this.handleScroll);
+  },
+  destroyed() {
+    window.removeEventListener("scroll", this.handleScroll);
   },
   methods: {
     getSearchedVideos: function(searchValue) {
@@ -34,16 +51,37 @@ export default {
           method: "GET",
           params: {
             part: "snippet",
-            maxResults: 5,
-            q: searchValue
+            maxResults: 15,
+            q: searchValue,
+            nextPageToken: this.nextPageToken
           }
         })
         .then(response => {
           const responseLists = mapSearchListToChannelAndVideoList(response);
-          this.videos = responseLists.videosList;
-          this.channels = responseLists.channelList;
+
+          if (this.searchValue !== searchValue) {
+            this.videos = responseLists.videosList;
+            this.channels = responseLists.channelList;
+            this.searchValue = searchValue;
+          } else {
+            this.videos.push(...responseLists.videosList);
+            this.channels.push(...responseLists.channelList);
+          }
+          this.nextPageToken = responseLists.nextPageToken || "";
           this.isLoading = false;
+          this.errorMessage = "";
+        })
+        .catch(response => {
+          this.errorMessage = response.result.error.message;
         });
+    },
+    handleScroll: function() {
+      let bottomOfWindow =
+        document.documentElement.scrollTop + window.innerHeight ===
+        document.documentElement.offsetHeight;
+      if (bottomOfWindow) {
+        this.getSearchedVideos(this.searchValue);
+      }
     }
   }
 };
@@ -53,6 +91,9 @@ export default {
 $padding: 0 20%;
 $padding-mobile: 2% 5%;
 #app {
+  [v-cloak] {
+    display: none;
+  }
   font-family: Roboto, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

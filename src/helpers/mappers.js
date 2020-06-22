@@ -4,9 +4,10 @@ import {
 } from './constants';
 
 export const mapSearchListToChannelAndVideoList = (searchList) => {
+    const result = searchList.result;
     const channelList = [];
     const videosList = [];
-    searchList.result.items.forEach(searchItem => {
+    result.items.forEach(searchItem => {
         const snippet = searchItem.snippet;
         const kind = searchItem.id.kind;
         if (kind === YOUTUBE_CHANNEL_TYPE) {
@@ -17,6 +18,8 @@ export const mapSearchListToChannelAndVideoList = (searchList) => {
     });
     return {
         channelList,
-        videosList
+        videosList,
+        nextPageToken: result.nextPageToken,
+        maxListCount: result.pageInfo.totalResults
     };
 }
