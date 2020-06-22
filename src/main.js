@@ -1,21 +1,23 @@
 import Vue from "vue";
 import App from "./App.vue";
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { faSearch, faWindowClose } from "@fortawesome/free-solid-svg-icons";
+import {
+  library
+} from "@fortawesome/fontawesome-svg-core";
+import {
+  faSearch,
+  faWindowClose
+} from "@fortawesome/free-solid-svg-icons";
 import {
   FontAwesomeIcon,
   FontAwesomeLayers,
   FontAwesomeLayersText,
 } from "@fortawesome/vue-fontawesome";
 import VueGoogleApi from "vue-google-api";
+import {
+  VUE_GOOGLE_API_CONFIG
+} from './helpers/constants';
 
-const config = {
-  apiKey: "your_api_key",
-  clientId: "your_client_id.apps.googleusercontent.com",
-  scope: "space_separated_scopes",
-};
-
-Vue.use(VueGoogleApi, config);
+Vue.use(VueGoogleApi, VUE_GOOGLE_API_CONFIG);
 library.add(faSearch, faWindowClose);
 
 Vue.component("font-awesome-icon", FontAwesomeIcon);
