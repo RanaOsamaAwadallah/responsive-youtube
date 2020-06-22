@@ -35,7 +35,6 @@ $box-shadow: 0px 0px 3px 2px #ccc;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
   &:not(.mobile) {
     -webkit-box-shadow: $box-shadow;
     -moz-box-shadow: $box-shadow;
@@ -49,6 +48,7 @@ $box-shadow: 0px 0px 3px 2px #ccc;
     background-color: #d40f1c;
     padding: 10px;
     height: auto;
+    width: 90%;
   }
   .logo {
     width: 80px;
