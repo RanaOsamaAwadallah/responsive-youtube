@@ -2,6 +2,7 @@
   <div id="app" :class="{mobile: isMobile()}">
     <Header v-cloak :isMobile="isMobile()" v-on:search-btn-click="getSearchedVideos($event)" />
     <div v-cloak v-if="errorMessage">{{this.errorMessage}}</div>
+    <!-- To be replaced with body and routes -->
     <SearchResult
       v-cloak
       v-else
