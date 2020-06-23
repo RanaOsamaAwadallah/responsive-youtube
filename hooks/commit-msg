@@ -9,7 +9,7 @@ if (message.match(/^\[(NEW|CONFIG|TEST|REFACTOR|STYLE|DOCS|FIX)\]+ .*/gm)) {
 } else {
   console.log(
     "\x1b[31m",
-    "Use a message that starts with [NEW|TEST|REFACTOR|STYLE|DOCS|FIX|MERGE] & a space after",
+    "Use a message that starts with [NEW|CONFIG|TEST|REFACTOR|STYLE|DOCS|FIX|MERGE] & a space after",
     "\x1b[0m"
   );
   process.exit(5);
