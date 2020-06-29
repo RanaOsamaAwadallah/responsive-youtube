@@ -51,6 +51,7 @@ export default {
   methods: {
     getSearchedVideos: function(searchValue) {
       this.isLoading = true;
+      this.$router.replace({ name: "Search", query: { query: searchValue } });
       this.$gapi
         .request({
           path: "https://www.googleapis.com/youtube/v3/search?",
