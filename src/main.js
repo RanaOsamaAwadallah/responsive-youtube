@@ -16,6 +16,7 @@ import VueGoogleApi from "vue-google-api";
 import {
   VUE_GOOGLE_API_CONFIG
 } from './helpers/constants';
+import router from './router'
 
 Vue.use(VueGoogleApi, VUE_GOOGLE_API_CONFIG);
 library.add(faSearch, faWindowClose);
@@ -27,5 +28,6 @@ Vue.component("font-awesome-layers-text", FontAwesomeLayersText);
 Vue.config.productionTip = false;
 
 new Vue({
-  render: (h) => h(App),
+  router,
+  render: (h) => h(App)
 }).$mount("#app");
