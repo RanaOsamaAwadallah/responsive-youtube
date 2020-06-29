@@ -1,13 +1,21 @@
 <template>
   <div class="search-result" :class="{ mobile: isMobile }">
-    <div v-for="(video, index) in videos" :key="index+video.title" class="video-list-item">
-      <div class="video-list-item__img">
-        <img :src="video.thumbnails.medium.url" />
-      </div>
+    <div
+      v-for="(video, index) in videos"
+      :key="index + video.title"
+      class="video-list-item"
+    >
+      <router-link :to="{ name: 'Video', params: { id: video.id } }">
+        <div class="video-list-item__img">
+          <img :src="video.thumbnails.medium.url" />
+        </div>
+      </router-link>
       <div class="video-list-item__data">
-        <div class="title">{{video.title}}</div>
-        <div class="channel-name">{{video.channelTitle}}</div>
-        <div class="description" v-if="!isMobile">{{video.description}}</div>
+        <router-link :to="{ name: 'Video', params: { id: video.id } }"
+          ><div class="title">{{ video.title }}</div></router-link
+        >
+        <div class="channel-name">{{ video.channelTitle }}</div>
+        <div class="description" v-if="!isMobile">{{ video.description }}</div>
       </div>
     </div>
   </div>
@@ -19,8 +27,15 @@ export default {
   props: {
     isMobile: Boolean,
     channels: Array,
-    videos: Array
-  }
+    videos: Array,
+  },
+  methods: {
+    openVideo: function(id) {
+      /* eslint-disable-next-line */
+      debugger;
+      this.$router.go({ path: `/video/${id}` });
+    },
+  },
 };
 </script>
 
@@ -35,6 +50,7 @@ $faded-font-color: #606060;
       width: 246px;
       height: 138px;
       margin-right: 16px;
+      cursor: pointer;
     }
     .video-list-item__data {
       .title {
@@ -45,6 +61,7 @@ $faded-font-color: #606060;
         text-overflow: ellipsis;
         white-space: normal;
         padding-bottom: 5px;
+        cursor: pointer;
       }
 
       .channel-name,
