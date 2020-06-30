@@ -1,19 +1,15 @@
 <template>
   <div class="search-result" :class="{ mobile: isMobile }">
-    <div
-      v-for="(video, index) in videos"
-      :key="index + video.title"
-      class="video-list-item"
-    >
+    <div v-for="(video, index) in videos" :key="index + video.title" class="video-list-item">
       <router-link :to="{ name: 'Video', params: { id: video.id } }">
         <div class="video-list-item__img">
           <img :src="video.thumbnails.medium.url" />
         </div>
       </router-link>
       <div class="video-list-item__data">
-        <router-link :to="{ name: 'Video', params: { id: video.id } }"
-          ><div class="title">{{ video.title }}</div></router-link
-        >
+        <router-link :to="{ name: 'Video', params: { id: video.id } }">
+          <div class="title">{{ video.title }}</div>
+        </router-link>
         <div class="channel-name">{{ video.channelTitle }}</div>
         <div class="description" v-if="!isMobile">{{ video.description }}</div>
       </div>
@@ -27,15 +23,13 @@ export default {
   props: {
     isMobile: Boolean,
     channels: Array,
-    videos: Array,
+    videos: Array
   },
   methods: {
     openVideo: function(id) {
-      /* eslint-disable-next-line */
-      debugger;
       this.$router.go({ path: `/video/${id}` });
-    },
-  },
+    }
+  }
 };
 </script>
 

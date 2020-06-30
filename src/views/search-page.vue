@@ -1,10 +1,6 @@
 <template>
   <div class="search-page" :class="{ mobile: isMobile() }">
-    <Header
-      v-cloak
-      :isMobile="isMobile()"
-      v-on:search-btn-click="getSearchedVideos($event)"
-    />
+    <Header v-cloak :isMobile="isMobile()" v-on:search-btn-click="getSearchedVideos($event)" />
     <div v-cloak v-if="errorMessage">{{ this.errorMessage }}</div>
     <!-- To be replaced with body and routes -->
     <SearchResult
@@ -19,7 +15,6 @@
 </template>
 
 <script>
-import Header from "../components/shared/header/Header.vue";
 import SearchResult from "../components/search-result-list/search-result-list";
 import { mixinDetictingMobile } from "../helpers/mixins";
 import { mapSearchListToChannelAndVideoList } from "../helpers/mappers";
@@ -27,8 +22,7 @@ import { mapSearchListToChannelAndVideoList } from "../helpers/mappers";
 export default {
   name: "SearchPage",
   components: {
-    Header,
-    SearchResult,
+    SearchResult
   },
   mixins: [mixinDetictingMobile],
   props: ["query"],
@@ -39,7 +33,7 @@ export default {
       isLoading: Boolean,
       searchValue: String,
       nextPageToken: String,
-      errorMessage: String,
+      errorMessage: String
     };
   },
   created() {
@@ -60,10 +54,10 @@ export default {
             part: "snippet",
             maxResults: 15,
             q: searchValue || this.query,
-            nextPageToken: this.nextPageToken,
-          },
+            nextPageToken: this.nextPageToken
+          }
         })
-        .then((response) => {
+        .then(response => {
           const responseLists = mapSearchListToChannelAndVideoList(response);
 
           if (this.searchValue !== searchValue) {
@@ -78,7 +72,7 @@ export default {
           this.isLoading = false;
           this.errorMessage = "";
         })
-        .catch((response) => {
+        .catch(response => {
           this.errorMessage = response.result.error.message;
         });
     },
@@ -89,8 +83,8 @@ export default {
       if (bottomOfWindow) {
         this.getSearchedVideos(this.searchValue);
       }
-    },
-  },
+    }
+  }
 };
 </script>
 

@@ -9976,6 +9976,11 @@ vue-jest@^3.0.5:
     tsconfig "^7.0.0"
     vue-template-es2015-compiler "^1.6.0"
 
+vue-lazy-youtube-video@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/vue-lazy-youtube-video/-/vue-lazy-youtube-video-2.0.0.tgz#9985d2fa5c23085162d4d5c3189c878feabd2028"
+  integrity sha512-sKt2WTExfhbaq8dSIIQnPfmS/ShKzhHEl8HtQ8j4uqsDpVNyw9zKrI/KGfbxo/3zU0lXztpz94KIBq6/xU9q6g==
+
 vue-loader@^15.9.2:
   version "15.9.2"
   resolved "https://registry.npm.taobao.org/vue-loader/download/vue-loader-15.9.2.tgz#ae01f5f4c9c6a04bff4483912e72ef91a402c1ae"
