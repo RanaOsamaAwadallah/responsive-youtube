@@ -17,6 +17,8 @@ import {
   VUE_GOOGLE_API_CONFIG
 } from './helpers/constants';
 import router from './router'
+import "vue-lazy-youtube-video/dist/style.simplified.css";
+
 
 Vue.use(VueGoogleApi, VUE_GOOGLE_API_CONFIG);
 library.add(faSearch, faWindowClose);
