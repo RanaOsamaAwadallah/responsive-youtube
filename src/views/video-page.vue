@@ -1,6 +1,5 @@
 <template>
   <div class="video-page" :class="{ mobile: isMobile() }">
-    Video PAge {{ $route.params.id }}
     <div class="video-page__video">
       <LazyYoutubeVideo :src="`https://www.youtube.com/embed/${this.$route.params.id}`" />
     </div>
