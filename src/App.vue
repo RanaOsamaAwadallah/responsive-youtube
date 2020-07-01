@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" :class="{mobile:isMobile()}">
     <Header v-cloak :isMobile="isMobile()" v-on:search-btn-click="getSearchedVideos($event)" />
     <router-view class="body" v-cloak :videos="videos" :errorMessage="errorMessage" />
   </div>
