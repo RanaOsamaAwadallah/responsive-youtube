@@ -34,7 +34,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$faded-font-color: #606060;
+@import "../../assets/styles/_variables.scss";
+
 .search-result {
   .video-list-item {
     display: flex;
@@ -47,6 +48,8 @@ $faded-font-color: #606060;
       cursor: pointer;
     }
     .video-list-item__data {
+      text-decoration: none;
+
       .title {
         color: black;
         overflow: hidden;
