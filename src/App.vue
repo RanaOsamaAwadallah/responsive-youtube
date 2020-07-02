@@ -41,7 +41,7 @@ export default {
       .getElementById("search-page")
       .addEventListener("scroll", this.handleScroll);
   },
-  destroyed() {
+  beforeDestroy() {
     document
       .getElementById("search-page")
       .removeEventListener("scroll", this.handleScroll);

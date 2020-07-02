@@ -45,7 +45,7 @@ export default {
       return this.videos ? this.video.channelTitle : "";
     },
   },
-  destroyed() {
+  beforeDestroy() {
     document
       .getElementById("video-page")
       .removeEventListener("scroll", this.handleScroll);
