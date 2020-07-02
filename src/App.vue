@@ -1,7 +1,16 @@
 <template>
-  <div id="app" :class="{mobile:isMobile()}">
-    <Header v-cloak :isMobile="isMobile()" v-on:search-btn-click="getSearchedVideos($event)" />
-    <router-view class="body" v-cloak :videos="videos" :errorMessage="errorMessage" />
+  <div id="app" :class="{ mobile: isMobile() }">
+    <Header
+      v-cloak
+      :isMobile="isMobile()"
+      v-on:search-btn-click="getSearchedVideos($event)"
+    />
+    <router-view
+      class="body"
+      v-cloak
+      :videos="videos"
+      :errorMessage="errorMessage"
+    />
   </div>
 </template>
 
@@ -14,7 +23,7 @@ export default {
   name: "App",
   mixins: [mixinDetictingMobile],
   components: {
-    Header
+    Header,
   },
   props: ["query"],
   data: () => {
@@ -24,7 +33,7 @@ export default {
       isLoading: Boolean,
       searchValue: String,
       nextPageToken: String,
-      errorMessage: String
+      errorMessage: String,
     };
   },
   mounted() {
@@ -49,10 +58,10 @@ export default {
             part: "snippet",
             maxResults: 15,
             q: searchValue || this.query,
-            nextPageToken: this.nextPageToken
-          }
+            nextPageToken: this.nextPageToken,
+          },
         })
-        .then(response => {
+        .then((response) => {
           const responseLists = mapSearchListToChannelAndVideoList(response);
 
           if (this.searchValue !== searchValue) {
@@ -67,19 +76,19 @@ export default {
           this.isLoading = false;
           this.errorMessage = "";
         })
-        .catch(response => {
+        .catch((response) => {
           this.errorMessage = response.result.error.message;
         });
     },
     handleScroll: function() {
       let el = document.getElementById("search-page");
       let bottomOfWindow = el.scrollTop === el.scrollHeight - el.offsetHeight;
-      console.log(el.scrollTop, el.scrollHeight - el.offsetHeight);
+
       if (bottomOfWindow) {
         this.getSearchedVideos(this.searchValue);
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
