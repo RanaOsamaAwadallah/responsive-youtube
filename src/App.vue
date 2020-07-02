@@ -1,6 +1,11 @@
 <template>
   <div id="app" :class="{mobile:isMobile()}">
-    <Header v-cloak :isMobile="isMobile()" v-on:search-btn-click="getSearchedVideos($event)" />
+    <Header
+      v-cloak
+      :isMobile="isMobile()"
+      v-on:search-btn-click="getSearchedVideos($event)"
+      v-on:user-scroll="handleScroll"
+    />
     <router-view class="body" v-cloak :videos="videos" :errorMessage="errorMessage" />
   </div>
 </template>
@@ -26,12 +31,6 @@ export default {
       nextPageToken: String,
       errorMessage: String
     };
-  },
-  created() {
-    window.addEventListener("scroll", this.handleScroll);
-  },
-  destroyed() {
-    window.removeEventListener("scroll", this.handleScroll);
   },
   methods: {
     getSearchedVideos: function(searchValue) {

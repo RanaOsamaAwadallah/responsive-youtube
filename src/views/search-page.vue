@@ -2,7 +2,14 @@
   <div class="search-page" :class="{ mobile: isMobile() }">
     <div v-if="errorMessage">{{ this.errorMessage }}</div>
     <!-- To be replaced with body and routes -->
-    <SearchResult v-else :isMobile="isMobile()" :channels="channels" :videos="videos" class="body" />
+    <SearchResult
+      v-else
+      :isMobile="isMobile()"
+      :channels="channels"
+      :videos="videos"
+      class="body"
+      v-on:scroll.native="$emit('user-scroll')"
+    />
   </div>
 </template>
 
@@ -16,7 +23,7 @@ export default {
     SearchResult
   },
   mixins: [mixinDetictingMobile],
-  props: ["videos"]
+  props: ["videos", "errorMessage"]
 };
 </script>
 
