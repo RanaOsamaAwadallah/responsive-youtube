@@ -18,6 +18,7 @@
 import Header from "./components/shared/header/Header.vue";
 import { mixinDetictingMobile } from "./helpers/mixins";
 import { mapSearchListToChannelAndVideoList } from "./helpers/mappers";
+import { handleScrollToBottom } from "./helpers/services";
 
 export default {
   name: "App",
@@ -82,11 +83,7 @@ export default {
     },
     handleScroll: function() {
       let el = document.getElementById("search-page");
-      let bottomOfWindow = el.scrollTop === el.scrollHeight - el.offsetHeight;
-
-      if (bottomOfWindow) {
-        this.getSearchedVideos(this.searchValue);
-      }
+      handleScrollToBottom(el, this.getSearchedVideos, this.searchValue);
     },
   },
 };
