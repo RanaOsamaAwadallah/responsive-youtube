@@ -84,7 +84,8 @@ export default {
 .video-page__detalis {
   border-bottom: 1px solid #dedede;
   line-height: 2rem;
-  padding: 10px 0;
+  padding: 15px 0;
+  margin-bottom: 15px;
 
   .video-title {
     font-weight: normal;

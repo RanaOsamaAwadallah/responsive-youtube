@@ -48,8 +48,9 @@ export default {
       cursor: pointer;
     }
     .video-list-item__data {
-      text-decoration: none;
-
+      a {
+        text-decoration: none;
+      }
       .title {
         color: black;
         overflow: hidden;
