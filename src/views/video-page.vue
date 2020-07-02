@@ -20,6 +20,7 @@ import { mixinDetictingMobile } from "../helpers/mixins";
 import LazyYoutubeVideo from "vue-lazy-youtube-video";
 import SearchResult from "../components/search-result-list/search-result-list";
 import { mapSearchListToChannelAndVideoList } from "../helpers/mappers";
+import { handleScrollToBottom } from "../helpers/services";
 
 export default {
   name: "VideoPage",
@@ -87,11 +88,7 @@ export default {
     },
     handleScroll: function() {
       let el = document.getElementById("video-page");
-      let bottomOfWindow = el.scrollTop === el.scrollHeight - el.offsetHeight;
-
-      if (bottomOfWindow) {
-        this.getRelatedVideos();
-      }
+      handleScrollToBottom(el, this.getRelatedVideos);
     },
   },
 };
