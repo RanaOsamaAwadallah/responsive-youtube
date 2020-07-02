@@ -1,5 +1,5 @@
 <template>
-  <div class="search-result" :class="{ mobile: isMobile }">
+  <div id="search-result" :class="{ mobile: isMobile }">
     <div v-for="(video, index) in videos" :key="index + video.title" class="video-list-item">
       <router-link :to="{ name: 'Video', params: { id: video.id } }">
         <div class="video-list-item__img">
@@ -36,7 +36,8 @@ export default {
 <style lang="scss" scoped>
 @import "../../assets/styles/_variables.scss";
 
-.search-result {
+#search-result {
+  margin-top: 2%;
   .video-list-item {
     display: flex;
     margin-bottom: 2%;

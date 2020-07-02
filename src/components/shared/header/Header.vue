@@ -41,8 +41,6 @@ $box-shadow: 0px 0px 3px 2px #ccc;
     -webkit-box-shadow: $box-shadow;
     -moz-box-shadow: $box-shadow;
     box-shadow: $box-shadow;
-    position: fixed;
-    top: 0;
     width: 60%;
     background-color: white;
   }

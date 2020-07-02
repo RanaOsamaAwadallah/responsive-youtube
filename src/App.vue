@@ -1,11 +1,6 @@
 <template>
   <div id="app" :class="{mobile:isMobile()}">
-    <Header
-      v-cloak
-      :isMobile="isMobile()"
-      v-on:search-btn-click="getSearchedVideos($event)"
-      v-on:user-scroll="handleScroll"
-    />
+    <Header v-cloak :isMobile="isMobile()" v-on:search-btn-click="getSearchedVideos($event)" />
     <router-view class="body" v-cloak :videos="videos" :errorMessage="errorMessage" />
   </div>
 </template>
@@ -31,6 +26,16 @@ export default {
       nextPageToken: String,
       errorMessage: String
     };
+  },
+  mounted() {
+    document
+      .getElementById("search-page")
+      .addEventListener("scroll", this.handleScroll);
+  },
+  destroyed() {
+    document
+      .getElementById("search-page")
+      .removeEventListener("scroll", this.handleScroll);
   },
   methods: {
     getSearchedVideos: function(searchValue) {
@@ -67,9 +72,9 @@ export default {
         });
     },
     handleScroll: function() {
-      let bottomOfWindow =
-        document.documentElement.scrollTop + window.innerHeight ===
-        document.documentElement.offsetHeight;
+      let el = document.getElementById("search-page");
+      let bottomOfWindow = el.scrollTop === el.scrollHeight - el.offsetHeight;
+      console.log(el.scrollTop, el.scrollHeight - el.offsetHeight);
       if (bottomOfWindow) {
         this.getSearchedVideos(this.searchValue);
       }
@@ -93,7 +98,8 @@ $padding-mobile: 2% 5%;
       padding: $padding;
     }
     .body {
-      margin-top: 100px;
+      height: calc(100vh - 56px);
+      overflow-y: scroll;
     }
   }
   &.mobile {
