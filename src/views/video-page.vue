@@ -1,11 +1,13 @@
 <template>
-  <div class="video-page" :class="{ mobile: isMobile() }">
+  <div id="video-page" :class="{ mobile: isMobile() }">
     <div class="video-page__video">
-      <LazyYoutubeVideo :src="`https://www.youtube.com/embed/${$route.params.id}`" />
+      <LazyYoutubeVideo
+        :src="`https://www.youtube.com/embed/${$route.params.id}`"
+      />
     </div>
     <div class="video-page__detalis">
-      <div class="video-title">{{videoTitle}}</div>
-      <div class="channel-title">{{channelTitle}}</div>
+      <div class="video-title">{{ videoTitle }}</div>
+      <div class="channel-title">{{ channelTitle }}</div>
     </div>
     <div class="video-page__related-videos">
       <SearchResult :isMobile="isMobile()" :videos="relatedVideos" />
@@ -28,22 +30,31 @@ export default {
     return {
       relatedVideos: Array,
       isLoading: Boolean,
-      errorMessage: String
+      nextPageToken: String,
+      errorMessage: String,
     };
   },
   computed: {
     video() {
-      return this.videos.find(video => video.id === this.$route.params.id);
+      return this.videos.find((video) => video.id === this.$route.params.id);
     },
     videoTitle() {
       return this.videos ? this.video.title : "";
     },
     channelTitle() {
       return this.videos ? this.video.channelTitle : "";
-    }
+    },
+  },
+  destroyed() {
+    document
+      .getElementById("video-page")
+      .removeEventListener("scroll", this.handleScroll);
   },
   mounted() {
     this.getRelatedVideos();
+    document
+      .getElementById("video-page")
+      .addEventListener("scroll", this.handleScroll);
   },
   methods: {
     getRelatedVideos() {
@@ -55,10 +66,10 @@ export default {
           params: {
             part: "snippet",
             type: "video",
-            id: this.$route.params.id
-          }
+            id: this.$route.params.id,
+          },
         })
-        .then(response => {
+        .then((response) => {
           const responseLists = mapSearchListToChannelAndVideoList(response);
 
           if (typeof _this.relatedVideos !== "object") {
@@ -70,11 +81,19 @@ export default {
           _this.isLoading = false;
           _this.errorMessage = "";
         })
-        .catch(response => {
+        .catch((response) => {
           _this.errorMessage = response.result.error.message;
         });
-    }
-  }
+    },
+    handleScroll: function() {
+      let el = document.getElementById("video-page");
+      let bottomOfWindow = el.scrollTop === el.scrollHeight - el.offsetHeight;
+
+      if (bottomOfWindow) {
+        this.getRelatedVideos();
+      }
+    },
+  },
 };
 </script>
 
