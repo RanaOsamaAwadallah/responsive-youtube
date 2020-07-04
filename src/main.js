@@ -21,8 +21,6 @@ import "vue-lazy-youtube-video/dist/style.simplified.css";
 
 
 Vue.use(VueGoogleApi, VUE_GOOGLE_API_CONFIG);
-console.log(VUE_GOOGLE_API_CONFIG)
-console.log('process', process)
 library.add(faSearch, faWindowClose);
 
 Vue.component("font-awesome-icon", FontAwesomeIcon);
