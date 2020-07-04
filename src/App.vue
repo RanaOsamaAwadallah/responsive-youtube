@@ -51,16 +51,19 @@ export default {
     getSearchedVideos: function(searchValue) {
       this.isLoading = true;
       this.$router.replace({ name: "Search", query: { query: searchValue } });
+      const requestBody = {
+        part: "snippet",
+        maxResults: 15,
+        q: searchValue || this.query,
+      };
+      if (typeof this.nextPageToken === "string") {
+        requestBody.pageToken = this.nextPageToken;
+      }
       this.$gapi
         .request({
           path: "https://www.googleapis.com/youtube/v3/search?",
           method: "GET",
-          params: {
-            part: "snippet",
-            maxResults: 15,
-            q: searchValue || this.query,
-            nextPageToken: this.nextPageToken,
-          },
+          params: requestBody,
         })
         .then((response) => {
           const responseLists = mapSearchListToChannelAndVideoList(response);

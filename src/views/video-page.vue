@@ -60,15 +60,18 @@ export default {
   methods: {
     getRelatedVideos() {
       const _this = this;
+      const requestBody = {
+        part: "snippet",
+        type: "video",
+      };
+      if (typeof this.nextPageToken === "string") {
+        requestBody.pageToken = this.nextPageToken;
+      }
       this.$gapi
         .request({
           path: `https://www.googleapis.com/youtube/v3/search`,
           method: "GET",
-          params: {
-            part: "snippet",
-            type: "video",
-            id: this.$route.params.id,
-          },
+          params: requestBody,
         })
         .then((response) => {
           const responseLists = mapSearchListToChannelAndVideoList(response);
