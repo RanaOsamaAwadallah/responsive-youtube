@@ -1,4 +1,5 @@
 import Vue from "vue";
+import Vuex from 'vuex'
 import App from "./App.vue";
 import {
   library
@@ -19,7 +20,7 @@ import {
 import router from './router'
 import "vue-lazy-youtube-video/dist/style.simplified.css";
 
-
+Vue.use(Vuex);
 Vue.use(VueGoogleApi, VUE_GOOGLE_API_CONFIG);
 library.add(faSearch, faWindowClose);
 
