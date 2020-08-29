@@ -19,6 +19,7 @@ import {
 } from './helpers/constants';
 import router from './router'
 import "vue-lazy-youtube-video/dist/style.simplified.css";
+import store from "./store/index"
 
 Vue.use(Vuex);
 Vue.use(VueGoogleApi, VUE_GOOGLE_API_CONFIG);
@@ -32,5 +33,6 @@ Vue.config.productionTip = false;
 
 new Vue({
   router,
-  render: (h) => h(App)
+  render: (h) => h(App),
+  store
 }).$mount("#app");
